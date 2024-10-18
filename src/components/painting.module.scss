@@ -1,0 +1,53 @@
+.entry {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // className={`v80 center ${i%2==0 ? 'rev' : ''}`} style={{ marginBottom: '10vh' }}
+    .photo {
+        transition: transform var(--trans);
+        width: auto;
+        height: auto;
+        max-width: 60vw;
+        max-height: 80vh;
+
+        // this could need changing, but it works for now
+        // min-width: 50vmin;
+        // min-height: 50vmin;
+
+        object-fit: contain;
+
+        &:hover {
+            transform: scale(1.01);
+        }
+    }
+
+    .info {
+        padding: var(--space-md);
+    }
+
+    @media (max-width: 800px) {
+        flex-direction: column;
+        height: auto;
+        margin-bottom: 20vh;
+        // height: 60vh;
+
+        .photo {
+            // max-height: 70vh !important;
+            // width: 80vw;
+            max-width: 80vw;
+            max-height: 80vh;
+            
+        }
+
+        .info {
+            max-width: 100%;
+            padding: var(--space-md) 0 0 0;
+            // padding: none !important;
+        }
+    }
+
+
+    
+}

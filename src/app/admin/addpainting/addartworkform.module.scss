@@ -1,0 +1,128 @@
+.form {
+    max-width: 40rem;
+    min-width: 25rem;
+
+    input, textarea {
+        width: 100%;
+        padding: var(--space-md);
+        border: none;
+        outline: none;
+        border-radius: var(--corners);
+        transition: all var(--trans);
+        background: var(--base);
+        color: var(--complement);
+        border: 1px solid transparent;
+        font-size: 1rem;
+        font-family: inherit;
+
+        &[type='number'] {
+            width: auto;
+        }
+
+        &:focus {
+            box-shadow: var(--shadow);
+        }
+    }
+
+    .errorInput {
+        border: 1px solid var(--red);
+    }
+
+    .errorMsg {
+        margin-top: var(--space-sm);
+        margin-left: var(--space-md);
+        color: var(--red);
+    }
+
+    .hidden {
+        color: var(--green);
+        transform: translateY(-5rem);
+        opacity: 0;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    h3 {
+        margin-top: var(--space-lg);
+        margin-bottom: var(--space-sm);
+    }
+
+    textarea {
+        height: auto;
+        min-height: 8rem;
+    }
+
+    .imageContainer {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        border-radius: var(--corners);
+        margin: var(--space-sm);
+        margin-left: 0;
+
+        &.sm {
+            .imagePreview {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .imageButton {
+                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.9rem;
+                font-weight: bold;
+            }
+        }
+
+        &:hover {
+            .imagePreview {
+                opacity: 0.5;
+            }
+        }
+
+        &:not(.hideButton) {
+            &:not(:hover) {
+                .imageButton {
+                    background: transparent;
+                }
+            }
+            .imageButton {
+                padding: 5rem;
+            }            
+        }
+
+        &.hideButton {
+            .imageButton {
+                pointer-events: inherit;
+                transform: translate(-50%, 100%);
+                opacity: 0;
+            }
+
+            &:hover {
+                .imageButton {
+                    transform: translate(-50%, -50%);
+                    opacity: 1
+                }
+            }
+        }
+
+        .imagePreview {
+            width: 7rem;
+            height: 7rem;
+            border: 1px solid var(--complement-faded);
+            border-radius: var(--corners);
+            background: var(--base-faded);
+            opacity: 1;
+            transition: opacity var(--trans);
+            object-fit: cover;
+            display: block;
+            position: relative;
+        }
+
+        .imageButton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

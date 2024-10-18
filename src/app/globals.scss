@@ -1,0 +1,505 @@
+
+:root {
+    --light-bg: #eeeeee;
+    --light-base: #dddddd;
+    --light-base-2: #cccccc;
+    --light-base-faded: #dddddd55;
+    --light-base-glass: #ddddddaa;
+    --light-complement: #333333;
+    --light-complement-2: #444444;
+    --light-complement-faded: #33333355;
+    --light-complement-glass: #333333aa;
+    --light-complement-faded-2: #33333322;
+    
+    --dark-bg: #111111;
+    --dark-base: #222222;
+    --dark-base-2: #333333;
+    --dark-base-faded: #22222255;
+    --dark-base-glass: #222222aa;
+    --dark-complement: #dddddd;
+    --dark-complement-2: #cccccc;
+    --dark-complement-faded: #dddddd55;
+    --dark-complement-glass: #ddddddaa;
+    --dark-complement-faded-2: #dddddd22;
+
+    
+    --accent: #55bb99;
+    --accent-faded: #55bb9955;
+    --accent-faded-2: #55bb9922;
+    --trans-fast: 0.1s ease;
+    --trans: 0.25s ease;
+    --trans-slow: 0.5s ease;
+
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1.3rem;
+    --space-lg: 2.3rem;
+    --space-xl: 3.5rem;
+    --space-xxl: 6rem;
+
+    --corners: 0.5rem;
+
+    // light mode (default)
+    --bg: var(--light-bg);
+    --base: var(--light-base);
+    --base-2: var(--light-base-2);
+    --base-faded: var(--light-base-faded);
+    --base-glass: var(--light-base-glass);
+    --complement: var(--light-complement);
+    --complement-2: var(--light-complement-2);
+    --complement-faded: var(--light-complement-faded);
+    --complement-glass: var(--light-complement-glass);
+    --shadow: var(--light-complement-faded) 0 0 20px 4px;
+    --shadow-2: var(--light-complement-faded) 0 0 10px 2px;
+
+
+
+    --blue: #6e90e3;
+    --blue-2: #3d5798;
+    --red: #ee7575;
+    --green: #55bb99;
+    --green-2: #256f56;
+
+}
+
+// dark mode
+html[data-theme='dark'] {
+    --bg: var(--dark-bg);
+    --base: var(--dark-base);
+    --base-2: var(--dark-base-2);
+    --base-faded: var(--dark-base-faded);
+    --base-glass: var(--dark-base-glass);
+    --complement: var(--dark-complement);
+    --complement-2: var(--dark-complement-2);
+    --complement-faded: var(--dark-complement-faded);
+    --complement-glass: var(--dark-complement-glass);
+    --shadow: var(--dark-complement-faded) 0 0 0 1px; // outline instead of shadow
+    --shadow-2: var(--dark-complement-faded) 0 0 0 1px;
+
+    --blue: #506fbb;
+
+    .bw {
+        filter: invert(1);
+    }
+}
+
+// css reset
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+    scrollbar-width: none;
+    // scrollbar-color: var(--accent) transparent;
+}
+
+// dynamic font size
+html {
+    font-size: calc(10px + 0.2vh + 0.5vw);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable overlay;
+}
+
+// keep things in bounds
+html, body { min-height: 100%; max-width: 100vw; overflow-x: hidden }
+
+body {
+    color: var(--complement);
+    background: var(--bg);
+    transition: background var(--trans);
+    // font-family: var(--font-raleway), Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+    padding: var(--space-lg);
+    // to account for absolutely positioned header
+    padding-top: var(--space-xxl);
+    height: 100%;
+}
+
+// hide scrollbar on Chrome, Safari, and Opera
+body::-webkit-scrollbar {
+    display: none;
+  }
+  
+// hide scrollbar on IE, Edge, Firefox
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+
+// --------------------------- END root stuff ---------------------------------
+// --------------------------------------------------------------------------
+// --------------------------- elements ------------------------------------
+
+p, h1, h2, h3, h4, h5, h6, input, button, div, span, a, li {
+    transition: color var(--trans-fast);
+    font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+a { color: inherit; text-decoration: none }
+
+button {
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+    
+    padding: 0.7rem  var(--space-md);
+    border-radius: 99px;
+    background: var(--base-2);
+    color: var(--complement);
+    transition: all var(--trans);
+    font-size: 1rem;
+
+    &.center {
+        margin: auto;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    &:hover:not(.primary):not(.secondary) {
+        filter: invert(1);
+    }
+
+    &.primary {
+        background: var(--green);
+        color: white;
+        &:hover {
+            background: var(--green-2)
+        }
+    }
+
+    &.secondary {
+        background: var(--blue);
+        color: white;
+        &:hover {
+            background: var(--blue-2)
+        }
+    }
+}
+
+.beacon {
+    position: relative;
+    z-index: 1;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    box-shadow: 0 0 0 0 var(--complement);
+    opacity: 0.4;
+  }
+
+
+  &.pulse {
+    &:before {
+        animation: pulse 2s infinite;
+    }
+  }
+}
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 var(--complement);
+      opacity: 0.4;
+    }
+    100% {
+      box-shadow: 0 0 0 30px rgba(0, 0, 0, 0);
+      opacity: 0;
+    }
+}
+
+// --------------------------- END elements ------------------------------------
+// --------------------------------------------------------------------------
+// --------------------------- classes ------------------------------------
+
+.card {
+    padding: var(--space-md);
+    background: var(--base);
+    border-radius: var(--corners);
+}
+
+.faded {
+    opacity: 0.5;
+}
+
+.rounded {
+    border-radius: var(--corners);
+}
+
+.bold { font-weight: bold }
+.thin { font-weight: lighter }
+.normal { font-weight: normal }
+.text-center { text-align: center }
+
+
+.hover-underline {
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        width: 110%;
+        height: 2px;
+        border-radius: 10px;
+        background: var(--complement);
+        top: 110%;
+        left: -5%;
+        transform: scaleX(0);
+        transition: all var(--trans);
+        opacity: 0;
+    }
+
+    &:hover {
+        &:after {
+            transform: scaleX(1);
+            opacity: 1;
+        }
+    }
+}
+
+// flex
+.flex { display: flex }
+.col { display: flex; flex-direction: column }
+.center { display: flex; justify-content: center; align-items: center }
+.wrap { flex-wrap: wrap }
+.rev { flex-direction: row-reverse }
+.rev.col { flex-direction: column-reverse }
+
+// flex item gap
+.sep-xs.flex, .sep-xs.col, .sep-xs.center  { gap: var(--space-xs) }
+.sep-sm.flex, .sep-sm.col, .sep-sm.center  { gap: var(--space-sm) }
+.sep-md.flex, .sep-md.col, .sep-md.center  { gap: var(--space-md) }
+.sep-lg.flex, .sep-lg.col, .sep-lg.center  { gap: var(--space-lg) }
+.sep-xl.flex, .sep-xl.col, .sep-xl.center  { gap: var(--space-xl) }
+// if not flex, emulate gap with margin (its approximate bc I use the next lowest spacing)
+.sep-xs:not(.flex):not(.col):not(.center) { > * { margin: 0.1rem }}
+.sep-sm:not(.flex):not(.col):not(.center) { > * { margin: var(--space-xs) }}
+.sep-md:not(.flex):not(.col):not(.center) { > * { margin: var(--space-sm) }}
+.sep-lg:not(.flex):not(.col):not(.center) { > * { margin: var(--space-md) }}
+.sep-xl:not(.flex):not(.col):not(.center) { > * { margin: var(--space-lg) }}
+
+.split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.iblock { display: inline-block }
+.inline { display: inline }
+.iflex { display: inline-flex }
+
+.fs { width: 100vw; height: 100vh }
+
+.full { width: 100%; height: 100%; }
+
+.v80 { height: 80vh }
+.v90 { height: 90vh }
+
+.w80 { width: 80vw }
+.w90 { width: 90vw }
+
+.bw {
+    transition: filter var(--trans);
+}
+
+.hov {
+    transition: background var(--trans);
+
+    &:hover {
+        background: var(--base-2);
+    }
+}
+
+img.hov {
+    opacity: 0.5;
+    transition: opacity var(--trans), transform var(--trans);
+    &:hover {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+
+img.logo { transition: all var(--trans), filter var(--trans-slow) }
+html[data-theme="dark"] {
+    img.logo {
+        filter: invert(1);
+    }
+}
+
+.circle { border-radius: 99px }
+.circle-xs { border-radius: 99px; width: var(--space-xs); height: var(--space-xs) }
+.circle-sm { border-radius: 99px; width: var(--space-sm); height: var(--space-sm) }
+.circle-md { border-radius: 99px; width: var(--space-md); height: var(--space-md) }
+.circle-lg { border-radius: 99px; width: var(--space-lg); height: var(--space-lg) }
+.circle-xl { border-radius: 99px; width: var(--space-xl); height: var(--space-xl) }
+.circle-xxl { border-radius: 99px; width: var(--space-xxl); height: var(--space-xxl) }
+
+
+// sm|md|lg spacing variants shorten suffix to s|m|l and DO NOT USE '-'
+//      ex: [ps, mxm, pyl] for [padding small, margin horizontal medium, padding vertical large]
+// xs|xl spacing variants keep their suffix and separate with '-'
+//      ex: [p-xs, mx-xl] for [padding x-small, margin horizontal x-large]
+
+// xs margin
+.m-xs { margin: var(--space-xs) }
+.mx-xs { margin-left: var(--space-xs); margin-right: var(--space-xs) }
+.my-xs { margin-top: var(--space-xs); margin-bottom: var(--space-xs) }
+.mt-xs { margin-top: var(--space-xs) }
+.mb-xs { margin-bottom: var(--space-xs) }
+.ml-xs { margin-left: var(--space-xs) }
+.mr-xs { margin-right: var(--space-xs) }
+
+// xs padding
+.p-xs { padding: var(--space-xs) }
+.px-xs { padding-left: var(--space-xs); padding-right: var(--space-xs) }
+.py-xs { padding-top: var(--space-xs); padding-bottom: var(--space-xs) }
+.pt-xs { padding-top: var(--space-xs) }
+.pb-xs { padding-bottom: var(--space-xs) }
+.pl-xs { padding-left: var(--space-xs) }
+.pr-xs { padding-right: var(--space-xs) }
+
+// sm margin
+.ms { margin: var(--space-sm) }
+.mxs { margin-left: var(--space-sm); margin-right: var(--space-sm) }
+.mys { margin-top: var(--space-sm); margin-bottom: var(--space-sm) }
+.mts { margin-top: var(--space-sm) }
+.mbs { margin-bottom: var(--space-sm) }
+.mls { margin-left: var(--space-sm) }
+.mrs { margin-right: var(--space-sm) }
+
+// sm padding
+.ps { padding: var(--space-sm) }
+.pxs { padding-left: var(--space-sm); padding-right: var(--space-sm) }
+.pys { padding-top: var(--space-sm); padding-bottom: var(--space-sm) }
+.pts { padding-top: var(--space-sm) }
+.pbs { padding-bottom: var(--space-sm) }
+.pls { padding-left: var(--space-sm) }
+.prs { padding-right: var(--space-sm) }
+
+// md margin
+.mm { margin: var(--space-md) }
+.mxm { margin-left: var(--space-md); margin-right: var(--space-md) }
+.mym { margin-top: var(--space-md); margin-bottom: var(--space-md) }
+.mtm { margin-top: var(--space-md) }
+.mbm { margin-bottom: var(--space-md) }
+.mlm { margin-left: var(--space-md) }
+.mrm { margin-right: var(--space-md) }
+
+// md padding
+.pm { padding: var(--space-md) }
+.pxm { padding-left: var(--space-md); padding-right: var(--space-md) }
+.pym { padding-top: var(--space-md); padding-bottom: var(--space-md) }
+.ptm { padding-top: var(--space-md) }
+.pbm { padding-bottom: var(--space-md) }
+.plm { padding-left: var(--space-md) }
+.prm { padding-right: var(--space-md) }
+
+// lg margin
+.ml { margin: var(--space-lg) }
+.mxl { margin-left: var(--space-lg); margin-right: var(--space-lg) }
+.myl { margin-top: var(--space-lg); margin-bottom: var(--space-lg) }
+.mtl { margin-top: var(--space-lg) }
+.mbl { margin-bottom: var(--space-lg) }
+.mll { margin-left: var(--space-lg) }
+.mrl { margin-right: var(--space-lg) }
+
+// lg padding
+.pl { padding: var(--space-lg) }
+.pxl { padding-left: var(--space-lg); padding-right: var(--space-lg) }
+.pyl { padding-top: var(--space-lg); padding-bottom: var(--space-lg) }
+.ptl { padding-top: var(--space-lg) }
+.pbl { padding-bottom: var(--space-lg) }
+.pll { padding-left: var(--space-lg) }
+.prl { padding-right: var(--space-lg) }
+
+// xl margin
+.m-xl { margin: var(--space-xl) }
+.mx-xl { margin-left: var(--space-xl); margin-right: var(--space-xl) }
+.my-xl { margin-top: var(--space-xl); margin-bottom: var(--space-xl) }
+.mt-xl { margin-top: var(--space-xl) }
+.mb-xl { margin-bottom: var(--space-xl) }
+.ml-xl { margin-left: var(--space-xl) }
+.mr-xl { margin-right: var(--space-xl) }
+
+// xl padding
+.p-xl { padding: var(--space-xl) }
+.px-xl { padding-left: var(--space-xl); padding-right: var(--space-xl) }
+.py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl) }
+.pt-xl { padding-top: var(--space-xl) }
+.pb-xl { padding-bottom: var(--space-xl) }
+.pl-xl { padding-left: var(--space-xl) }
+.pr-xl { padding-right: var(--space-xl) }
+
+// xxl margin
+.m-xxl { margin: var(--space-xxl) }
+.mx-xxl { margin-left: var(--space-xxl); margin-right: var(--space-xxl) }
+.my-xxl { margin-top: var(--space-xxl); margin-bottom: var(--space-xxl) }
+.mt-xxl { margin-top: var(--space-xxl) }
+.mb-xxl { margin-bottom: var(--space-xxl) }
+.ml-xxl { margin-left: var(--space-xxl) }
+.mr-xxl { margin-right: var(--space-xxl) }
+
+// xxl padding
+.p-xxl { padding: var(--space-xxl) }
+.px-xxl { padding-left: var(--space-xxl); padding-right: var(--space-xxl) }
+.py-xxl { padding-top: var(--space-xxl); padding-bottom: var(--space-xxl) }
+.pt-xxl { padding-top: var(--space-xxl) }
+.pb-xxl { padding-bottom: var(--space-xxl) }
+.pl-xxl { padding-left: var(--space-xxl) }
+.pr-xxl { padding-right: var(--space-xxl) }
+
+
+.bg-base { background: var(--base) }
+.color-base { color: var(--base) }
+.bg-complement { background: var(--complement) }
+.color-complement { color: var(--complement) }
+.bg-accent { background: var(--accent) }
+.color-accent { color: var(--accent) }
+
+.border, .border-complement { border: 1px solid var(--complement) }
+.border-base { border: 1px solid var(--base) }
+.border-accent { border: 1px solid var(--accent) }
+
+.debug {
+    border: 2px solid var(--complement);
+    > * {
+        border: 2px dashed var(--complement);
+        > * {
+            border: 1px solid var(--complement);
+            > * {
+                border: 1px dashed var(--complement);
+                > * {
+                    border: 1px dashed red;
+                }
+            }
+        }
+    }
+}
+
+// --------------------------- END classes ------------------------------------
+// ------------------------------------ ------------------------------------
+// --------------------------- other ------------------------------------
+
+
+
+// --------------------------- END other ------------------------------------
+

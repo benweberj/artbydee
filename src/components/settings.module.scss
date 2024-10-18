@@ -1,0 +1,28 @@
+
+.container {
+    position: relative;
+
+    .icon {
+    
+    }
+    
+    .settings {
+        position: absolute;
+        top: 100%;
+        right: 100%;
+        border-radius: var(--corners);
+        background: var(--bg);
+        padding: var(--space-md);
+        white-space: nowrap;
+        box-shadow: var(--shadow);
+        overflow-y: auto;
+        transition: transform var(--trans), opacity var(--trans), background var(--trans);
+    }
+    
+    .closed {
+        opacity: 0;
+        transform: translateX(10px) translateY(-10px);
+        user-select: none;
+        pointer-events: none;
+    }
+}

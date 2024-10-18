@@ -1,0 +1,60 @@
+.themeToggler {
+    position: relative;
+    background: var(--complement);
+    width: var(--dim);
+    height: var(--dim);
+    border-radius: 99px;
+    transform: scale(1) rotate(0deg);
+    transition: all 0.25s ease;
+    opacity: 0.3;
+
+    &:hover {
+        opacity: 1;
+        background: var(--accent);
+
+        > div {
+            background: var(--accent) !important;
+        }
+    }
+
+    &Dark {
+        background: var(--complement);
+        transform: scale(1.4) rotate(180deg);
+
+        &:hover {
+            box-shadow: 0 0 20px 0 rgba(173, 216, 230, 0.7);
+            background: var(--complement);
+
+            > div {
+                background: var(--complement) !important;
+            }
+        }
+    }
+
+    > div {
+        position: absolute;
+        width: var(--dotwidth);
+        height: var(--dotwidth);
+        border-radius: 99px;
+        transition: all 0.25s ease;
+        background: var(--complement);
+
+        @for $i from 1 through 8 {
+            &:nth-child(#{$i}) {
+                transition-delay: #{$i * 50}ms;
+            }
+        }
+    }
+}
+
+.cornerDot {
+    opacity: 0.7;
+}
+
+.moonDot {
+    opacity: 0.7;
+
+    &Dark {
+        background: var(--base) !important;
+    }
+}
